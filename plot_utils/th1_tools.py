@@ -6,7 +6,7 @@ import warnings
 from typing import Dict, List, Union
 
 import ROOT
-from HEPTools.plot_utils import plot_utils
+from easy_atlas_plot.plot_utils import plot_utils
 
 Cfg_Dict = Dict[str, Union[int, float, str, Dict[str, Union[int, float, str]]]]
 
