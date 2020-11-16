@@ -252,6 +252,18 @@ class RatioPlot(object):
         self._hist_ratio.apply_config()
         self._hist_ratio.get_hist().Draw("same")
 
+    def print_ratio(self, save_path=None):
+        """Prints the value of ratios bin by bin"""
+        n_bins = self._hist_ratio.get_hist().GetNbinsX()
+        if save_path:
+            save_file = open(save_path, "w")
+            save_file.write("bin_center, bin_value\n")
+        for i in range(1, n_bins + 1):
+            bin_center = self._hist_ratio.get_hist().GetBinCenter(i)
+            bin_value = self._hist_ratio.get_hist().GetBinContent(i)
+            if save_path:
+                save_file.write(f"{bin_center}, {bin_value}\n")
+
     def update_style_cfg(self, section, property_key, value):
         self.style_cfg[section][property_key] = value
 
