@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import configparser
 import glob
+import pathlib
 import sys
 from array import array
 
@@ -136,6 +137,8 @@ def plot_brazilian(plot_config, times_xsec=False):
     if parse_bool(plot_config, "PLOT", "plot_atlas_process"):
         plot_process = parse_str(plot_config, "PLOT", "process")
         process_y = parse_float(plot_config, "PLOT", "atlas_process_y_cor")
+        if plot_process is None:
+            plot_process = ""
         atlas_draw_text(label_x, process_y, plot_process, size=0.037)
     # plot legend
     if parse_bool(plot_config, "PLOT", "plot_legend"):
@@ -163,6 +166,7 @@ def plot_brazilian(plot_config, times_xsec=False):
     save_folder = parse_str(plot_config, "FILE", "save_folder")
     if not save_folder:
         save_folder = "./"
+    pathlib.Path(save_folder).mkdir(parents=True, exist_ok=True)
     if not times_xsec:
         save_file = parse_str(plot_config, "FILE", "save_file")
         if not save_file:
